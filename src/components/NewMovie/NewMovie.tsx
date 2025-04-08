@@ -16,6 +16,7 @@ export const NewMovie: React.FC<NewMovieProps> = ({ onAdd }) => {
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isFormValid, setIsFormValid] = useState(false);
+  const [count, setCount] = useState(0);
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement> | null) => {
     if (e === null) {
@@ -64,11 +65,12 @@ export const NewMovie: React.FC<NewMovieProps> = ({ onAdd }) => {
         imdbId: '',
       });
       setErrors({});
+      setCount(prev => prev + 1);
     }
   };
 
   return (
-    <form className="NewMovie" onSubmit={handleSubmit}>
+    <form className="NewMovie" onSubmit={handleSubmit} key={count}>
       <h2 className="title">Add a movie</h2>
 
       <TextField
